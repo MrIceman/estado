@@ -1,7 +1,7 @@
 name: estado
 description: A flutter agnostic implementation of MVVM. It will leave your Widgets alone and you can focus on writing clean Flutter code
 version: 0.0.1
-homepage: http://www.nowocode.de
+homepage: https://github.com/MrIceman/estado
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
