@@ -6,4 +6,12 @@ class LoadingState extends ViewState {
   bool isLoading;
 
   LoadingState(this.isLoading) : super(name);
+
+  @override
+  bool operator ==(Object other) {
+    return super == other && (other as LoadingState).isLoading == isLoading;
+  }
+
+  @override
+  int get hashCode => super.hashCode;
 }

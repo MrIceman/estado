@@ -4,6 +4,18 @@ abstract class ViewState {
   String qualifier;
 
   ViewState(this.qualifier);
+
+  @override
+  String toString() {
+    return 'ViewState{qualifier: $qualifier}';
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ViewState &&
+          runtimeType == other.runtimeType &&
+          qualifier == other.qualifier;
 }
 
 abstract class ViewEvent {
