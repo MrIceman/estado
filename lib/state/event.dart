@@ -1,11 +1,3 @@
-@Deprecated(
-    "Use ViewEvent instead. It's the proper terminology for what a ViewModel emits")
-abstract class ViewState {
-  String qualifier;
-
-  ViewState(this.qualifier);
-}
-
 abstract class ViewEvent {
   String qualifier;
 
@@ -24,5 +16,6 @@ abstract class ViewEvent {
           qualifier == other.qualifier;
 
   @override
-  int get hashCode => qualifier.hashCode;
+  int get hashCode => super.hashCode;
+
 }
