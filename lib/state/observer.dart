@@ -16,21 +16,10 @@ mixin ViewModelObserver {
   }
 }
 
-mixin ViewModelEventObserver {
-  Map<String, Function>? _eventHandlers;
-
-  Map<String, Function> getHandleEventFunctions();
-
-  void notify(ViewEvent state) {
-    _eventHandlers ??= getHandleEventFunctions();
-
-    _eventHandlers?[state.qualifier]?.call(state);
-  }
-
-  void cleanUp() {
-    _eventHandlers = null;
-  }
+abstract class EventObserver {
+  void notify(ViewEvent? state);
 }
+
 
 @Deprecated("use EventObserver instead")
 abstract class StateObserver {
@@ -41,10 +30,3 @@ abstract class StateObserver {
   void cleanUp();
 }
 
-abstract class EventObserver {
-  Map<String, Function> getHandleStateFunctions();
-
-  void notify(ViewEvent? state);
-
-  void cleanUp();
-}

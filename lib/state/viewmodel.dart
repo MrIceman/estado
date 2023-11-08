@@ -40,7 +40,6 @@ abstract class EventViewModel {
 
   bool unsubscribe(EventObserver o) {
     if (_observerList.contains(o)) {
-      o.cleanUp();
       _observerList.remove(o);
       return true;
     } else {
