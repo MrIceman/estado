@@ -40,13 +40,13 @@ class LoginViewModel extends ViewModel {
   
   void logIn(String email, String password) {
     // LoadingState could be a State defined in a common package or so
-    notify(LoadingState(isLoading: true));
+    notify(LoadingEvent(isLoading: true));
     
     authRepository.login(email, password);
     
     // let's assume login was successful
-    notifyState(LoadingState(isLoading: false));
-    notify(LoginSuccessfulState());
+    notifyState(LoadingEvent(isLoading: false));
+    notify(OnLoginSuccessfulEvent());
   }
 }
 
@@ -56,8 +56,7 @@ class LoginSuccessfulState extends ViewState{
   LoginSuccessfulState() : super(name);
 }
 
-class LoginUiState extends State<LoginUi> 
-with ViewModelObserver implements StateObserver {
+class LoginUiState extends State<LoginUi> implements EventObserver {
   LoginViewModel vm = getViewModel(); // use your DI lib or own factory, its up to you
   
   void initState() {
@@ -69,18 +68,13 @@ with ViewModelObserver implements StateObserver {
     super.deactivate();
     vm.unsubscribe(this);
   }
-  void _handleLoginSuccessfulState(LoginSuccessfulState state) {
+  @override
+  void notify(ViewModelEvent event) {
+  if(event is LoginSuccessfulEvent) {
     this.setState({
       loggedIn: true
     });
-  }
-
-  @override
-  Map<String, Function> getHandleStateFunctions() {
-    return {
-      LoadingState.name: (LoadingState state) => setState({isLoading: state.isLoading}),
-      LoginSuccessfulState.name: _handleLoginSuccessfulState
-    };
+   }
   }
 }
 ```
