@@ -45,7 +45,7 @@ class LoginViewModel extends ViewModel {
     authRepository.login(email, password);
     
     // let's assume login was successful
-    notifyState(LoadingEvent(isLoading: false));
+    notify(LoadingEvent(isLoading: false));
     notify(OnLoginSuccessfulEvent());
   }
 }
