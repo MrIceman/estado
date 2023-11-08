@@ -50,10 +50,9 @@ class LoginViewModel extends ViewModel {
   }
 }
 
-class LoginSuccessfulState extends ViewState{
-  static String name = "LoginSuccessful";
+class LoginSuccessfulEvent extends ViewEvent{
 
-  LoginSuccessfulState() : super(name);
+  LoginSuccessfulState() : super();
 }
 
 class LoginUiState extends State<LoginUi> implements EventObserver {
