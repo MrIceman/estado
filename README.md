@@ -1,7 +1,7 @@
 # Install
 Add to your `pubspec.yaml` dependencies following line
 ```
-  estado: ^0.0.6
+  estado: ^0.0.7
 ```
 
 ## A framework agnostic state management library based on MVVM
