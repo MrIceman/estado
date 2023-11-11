@@ -45,15 +45,14 @@ class LoginViewModel extends ViewModel {
     authRepository.login(email, password);
     
     // let's assume login was successful
-    notifyState(LoadingEvent(isLoading: false));
+    notify(LoadingEvent(isLoading: false));
     notify(OnLoginSuccessfulEvent());
   }
 }
 
-class LoginSuccessfulState extends ViewState{
-  static String name = "LoginSuccessful";
+class LoginSuccessfulEvent extends ViewEvent{
 
-  LoginSuccessfulState() : super(name);
+  LoginSuccessfulState() : super();
 }
 
 class LoginUiState extends State<LoginUi> implements EventObserver {
