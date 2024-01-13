@@ -1,7 +1,7 @@
 # Install
 Add to your `pubspec.yaml` dependencies following line
 ```
-  estado: ^0.0.6
+  estado: ^0.0.8
 ```
 
 ## A framework agnostic state management library based on MVVM
@@ -36,7 +36,7 @@ fully on writing your UI using the Flutter SDK or other UI libs.
 
 Here's a simple code snippet how to use this library to separate the state from your UI
 ```dart
-class LoginViewModel extends ViewModel {
+class LoginViewModel extends EventViewModel {
   
   void logIn(String email, String password) {
     // LoadingState could be a State defined in a common package or so

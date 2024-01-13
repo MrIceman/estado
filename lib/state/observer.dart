@@ -1,32 +1,14 @@
-import 'package:estado/state/state.dart';
-
-mixin ViewModelObserver {
-  Map<String, Function>? _stateHandlers;
-
-  Map<String, Function> getHandleStateFunctions();
-
-  void notify(ViewState state) {
-    _stateHandlers ??= getHandleStateFunctions();
-
-    _stateHandlers?[state.qualifier]?.call(state);
-  }
-
-  void cleanUp() {
-    _stateHandlers = null;
-  }
-}
+import 'package:estado/state/event.dart';
 
 abstract class EventObserver {
   void notify(ViewEvent? state);
 }
 
-
 @Deprecated("use EventObserver instead")
 abstract class StateObserver {
   Map<String, Function> getHandleStateFunctions();
 
-  void notify(ViewState? state);
+  void notify(ViewEvent? state);
 
   void cleanUp();
 }
-

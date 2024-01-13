@@ -16,6 +16,5 @@ abstract class ViewEvent {
           qualifier == other.qualifier;
 
   @override
-  int get hashCode => super.hashCode;
-
+  int get hashCode => qualifier.hashCode;
 }
