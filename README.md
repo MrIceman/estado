@@ -1,20 +1,13 @@
 # Install
 Add to your `pubspec.yaml` dependencies following line
 ```
-  estado: ^0.0.8
+  estado: ^0.0.9
 ```
 
 ## A framework agnostic state management library based on MVVM
-Ever felt tired of glueing your Flutter Widgets with some Provider classes? All you want to do is
-write your App using a pure Flutter API. Suddenly, you have to wrap your Components with Providers
-and other classes just so you can share data. Estado is a platform and framework agnostic
-implementation of MVVM (Model-View-ViewModel). It separates the state of your UI and doesn't force
-you to wrap your UI component classes with some annoying Providers or Controllers. It does not
-perform dependency injection, Navigation or anything else for you. Need a shared state? Well make
-your ViewModel class static and subscribe / unsubscribe the Widget to / from the ViewModel yourself.
-All this library does is give you the tools to separate your UI State completely away from your
-Views / Widgets. Your actual State class (ViewModel) is completely decoupled from Flutter and you
-can 100% unit test it
+Estado is a framework agnostic state management library based on MVVM. It's an alternative approach to BloC or Provider
+that allows you to build your UI without any framework specific code, your build method will be pure Flutter code again and 
+not bloated with 3rd party code.
 
 You don't have to learn any magic, state management is completely in your hands again and
 your build Method won't need any Providers or anything else. 
@@ -36,6 +29,8 @@ fully on writing your UI using the Flutter SDK or other UI libs.
 
 Here's a simple code snippet how to use this library to separate the state from your UI
 ```dart
+// The ViewModel manipulates the state of your UI, it calls your underlying layer, which could be a Repository or a Service / UseCase (in case you use clean architecture)
+// possibly orchestrates / aggregates data, and then emits a new event to the UI which causes a state change.
 class LoginViewModel extends EventViewModel {
   
   void logIn(String email, String password) {
@@ -50,31 +45,49 @@ class LoginViewModel extends EventViewModel {
   }
 }
 
+// A simple LoginSuccessfulEvent that indicates the UI that the login was successful
 class LoginSuccessfulEvent extends ViewEvent{
-
   LoginSuccessfulState() : super();
 }
 
-class LoginUiState extends State<LoginUi> implements EventObserver {
-  LoginViewModel vm = getViewModel(); // use your DI lib or own factory, its up to you
+// A simple wrapper around the State object, which hold now a ViewModel and takes care of the lifecycle handling
+// and gives you a callback when your ViewModel is ready to use and when it emits a new event.
+class LoginUiState extends ViewState<LoginViewModel, LoginWidget> {
+  bool _loginSuccessful = false;
+  bool _isLoading = false;
   
-  void initState() {
-    super.initState();
-    vm.subscribe(this);
+  
+  @override
+  Widget build(BuildContext context) {
+    // build your pure Flutter UI here, no Providers or anything else needed.
+    return Container(
+      child: _isLoading ? CircularProgressIndicator() : 
+      Column(children:[]),
+    );
   }
   
-  void deactivate() {
-    super.deactivate();
-    vm.unsubscribe(this);
-  }
   @override
   void notify(ViewModelEvent event) {
-  if(event is LoginSuccessfulEvent) {
-    this.setState({
-      loggedIn: true
+    setState(() {
+      switch(event.runtimeType) {
+          case LoginSuccessfulEvent:
+            // do something with the event, maybe navigate to another screen
+            break;
+        case LoadingEvent:
+            _isLoading = (event as LoadingEvent).isLoading;
+            break;
+      }
     });
-   }
   }
+  
+  @override
+  LoginViewModel buildViewModel() {
+    // do your ViewModel initialization and dependency injection here
+    return LoginViewModel();
+  }
+  
+  @override
+  
 }
 ```
 
