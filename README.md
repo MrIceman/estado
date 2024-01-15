@@ -1,4 +1,4 @@
-## A framework agnostic state management library based on MVVM
+## A framework agnostic state management library for Flutter based on MVVM
 A dart native framework agnostic state management library that won't touch the build method of your UI. It's an alternative approach to BloC or Provider
 that allows you to separate state logic from your UI without any framework specific code, your build method will be pure Flutter code again and 
 not bloated with 3rd party code. You can use it for any architecture you like and don't need to introduce
