@@ -1,29 +1,30 @@
-# Install
-Add to your `pubspec.yaml` dependencies following line
-```
-  estado: ^0.0.9
-```
-
 ## A framework agnostic state management library based on MVVM
-Estado is a framework agnostic state management library based on MVVM. It's an alternative approach to BloC or Provider
-that allows you to build your UI without any framework specific code, your build method will be pure Flutter code again and 
-not bloated with 3rd party code.
+A dart native framework agnostic state management library that won't touch the build method of your UI. It's an alternative approach to BloC or Provider
+that allows you to separate state logic from your UI without any framework specific code, your build method will be pure Flutter code again and 
+not bloated with 3rd party code. You can use it for any architecture you like and don't need to introduce
+further libraries if you would like to share state between your UIs, as it is in BloC. It's all in your own hands.
 
 You don't have to learn any magic, state management is completely in your hands again and
 your build Method won't need any Providers or anything else. 
 
+If you like to use BloC or Provider then it's okay.
 
-## Features
-
-Just Framework agnostic State Management that won't touch your UI code.
+Just Framework agnostic State Management that won't touch the build method of your UI. 
+You can use it for any architecture you like and don't need
 
 ## Getting started
 
 Think about how your UI should behave, what states do you need?
 Create a ViewModel for your Stateful Widget and call your data or domain layer from there.
-And then you emit a new State and your UI will handle that state. Your `build()` of your Flutter
+And then you emit a new Event and your UI will handle that state. Your `build()` of your Flutter
 Widget is 100% free from any library regarding State management, as it should be. You can focus
 fully on writing your UI using the Flutter SDK or other UI libs.
+
+# Install
+Add to your `pubspec.yaml` dependencies following line
+```
+  estado: ^0.0.9
+```
 
 ## Usage
 
