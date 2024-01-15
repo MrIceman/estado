@@ -2,14 +2,14 @@ import 'package:estado/state/observer.dart';
 import 'package:estado/state/viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
-abstract class ViewState<VM extends EventViewModel> extends State
+abstract class ViewState<VM extends EventViewModel, S extends StatefulWidget> extends State<S>
     implements EventObserver {
   late VM viewModel;
 
   @override
   void initState() {
     super.initState();
-    this.viewModel = getViewModel();
+    this.viewModel = buildViewModel();
     this.viewModel.subscribe(this);
     this.onViewModelReady();
   }
@@ -20,7 +20,7 @@ abstract class ViewState<VM extends EventViewModel> extends State
     super.dispose();
   }
 
-  VM getViewModel();
+  VM buildViewModel();
 
   void onViewModelReady();
 }
