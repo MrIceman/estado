@@ -88,6 +88,10 @@ class LoginUiState extends ViewState<LoginViewModel, LoginWidget> {
   }
   
   @override
+void onViewModelReady() {
+    // do something when your ViewModel is ready to use
+    // this.viewModel.logIn("email", "password");
+  }
   
 }
 ```
